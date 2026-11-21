@@ -165,7 +165,7 @@ function renderDistribution() {
   if (!active) return;
   const slot = state.profile.industryId === 'food' ? 0 : 1;
   const code = industryCodes(state.dataset)[slot]; const industryName = state.dataset.analysis.industries[slot].name;
-  $('distribution-intro').textContent = `고른 세 동 안에서 ${industryName} 점포가 어느 칸에 있는지 봅니다. 칸 하나는 가로세로 약 100m이고, 색이 짙을수록 그 칸에 점포가 많습니다.`;
+  $('distribution-intro').textContent = `색은 칸마다 수록된 ${industryName} 점포 수를 나타냅니다. 행정동마다 칸 크기와 축척이 다를 수 있습니다. 각 그림의 칸 크기를 먼저 확인하세요.`;
   $('distribution-legend').replaceChildren(...BINS.map((bin, position) => { const item = element('li', bin.label); item.prepend(element('span', undefined, `grid-swatch bin-${position + 1}`)); return item; }),
     (() => { const item = element('li', '다른 업종 점포만 있는 칸'); item.prepend(element('span', undefined, 'grid-swatch grid-context')); return item; })());
   $('distribution-charts').replaceChildren(...state.dataset.analysis.markets.map(market => {
@@ -270,6 +270,7 @@ function pickDong(slot, admCode) {
 
 function renderCosts(rows, industry) {
   const scope = currentCostScope();
+  status('cost-review-status', '');
   $('cost-context').textContent = `적용 중: ${industry.name} · 예산 ${number.format(state.profile.budgetManwon)}만 원 · 목표 ${state.profile.months}개월`;
   status('cost-status', scope.dirty ? '수정한 비용은 아직 미적용입니다. ‘입력 비용으로 계산’을 눌러 주세요.' : scope.applied ? '현재 자료·업종의 적용된 비용 가정입니다.' : '');
   $('cost-form').toggleAttribute('data-dirty', scope.dirty);
@@ -321,7 +322,10 @@ function render() {
   const analysis = state.dataset.analysis;
   $('dataset-notice').dataset.kind = state.dataset.kind;
   $('notice-title').textContent = synthetic ? '화면 확인용 가상 점포 자료' : publicFile ? '소상공인시장진흥공단 공개 점포 집계' : '사용자 제공 자료 · 원천 진위 미검증';
-  $('notice-description').textContent = synthetic ? '후보 A·B·C의 공간 범위와 점포 수는 시연을 위한 가정입니다.' : publicFile ? '대구 3개 행정동 기준입니다. 점포 수로 현재 영업 상태와 수요를 판단할 수 없습니다.' : '출처와 기준일의 형식을 검사했습니다. 원본과 공간 범위는 별도로 확인이 필요합니다.';
+  const publicNote = state.flows.size && canPickDongs()
+    ? '대구 행정동별 수록 점포입니다. ‘빠짐·새로’는 자료 목록의 변화이며, 실제 개업·폐업 여부는 별도로 확인해야 합니다.'
+    : '대구 행정동별 수록 점포입니다. 현재 영업 상태와 수요는 별도로 확인해야 합니다.';
+  $('notice-description').textContent = synthetic ? '후보 A·B·C의 공간 범위와 점포 수는 시연을 위한 가정입니다.' : publicFile ? publicNote : '출처와 기준일의 형식을 검사했습니다. 원본과 공간 범위는 별도로 확인이 필요합니다.';
   document.querySelector('.topbar .status-pill').textContent = synthetic ? '가상 데이터 데모' : publicFile ? '공개파일 집계' : '사용자 제공 자료';
   $('comparison-heading').textContent = analysis ? '권역별 경쟁환경 비교' : '상권별 경쟁환경 비교';
   const picking = canPickDongs();
@@ -494,15 +498,20 @@ function updateReview() {
   }
 }
 
-function setReviewOpen(open) {
+const reviewTriggers = [['view-review', 'data-status'], ['view-review-cost', 'cost-review-status']];
+let reviewOrigin = 'view-review';
+
+function setReviewOpen(open, trigger = reviewOrigin) {
+  reviewOrigin = trigger;
   $('review-panel').hidden = !open;
-  $('view-review').setAttribute('aria-expanded', String(open));
+  for (const [id] of reviewTriggers) $(id).setAttribute('aria-expanded', String(open));
   if (open) {
     updateReview();
     focusSection('review-heading', 'review-panel');
   } else {
     $('review-content').hidden = true;
-    $('view-review').focus();
+    const origin = $(reviewOrigin);
+    (origin.closest('[hidden]') ? $('view-review') : origin).focus();
   }
 }
 
@@ -696,14 +705,17 @@ async function start() {
     render();
     status('data-status', '프로젝트에 포함된 공개파일 집계로 돌아왔습니다.');
   });
-  $('view-review').addEventListener('click', () => {
-    if ($('review-panel').hidden && hasUnappliedEdits()) {
-      status('data-status', '수정 중인 조건이나 비용이 있습니다. 비교·계산에 적용한 뒤 검토안을 열어 주세요.', true);
-      return;
-    }
-    status('data-status', '');
-    setReviewOpen($('review-panel').hidden);
-  });
+  for (const [triggerId, statusId] of reviewTriggers) {
+    $(triggerId).addEventListener('click', () => {
+      const open = $('review-panel').hidden;
+      if (open && hasUnappliedEdits()) {
+        status(statusId, '수정 중인 조건이나 비용이 있습니다. 비교·계산에 적용한 뒤 검토안을 열어 주세요.', true);
+        return;
+      }
+      status(statusId, '');
+      setReviewOpen(open, triggerId);
+    });
+  }
   $('close-review').addEventListener('click', () => setReviewOpen(false));
   $('print-review').addEventListener('click', () => {
     if (!hasUnappliedEdits()) window.print();

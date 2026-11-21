@@ -274,6 +274,7 @@ form[data-dirty] .primary { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px #7fa58
 .cost-input-card input { margin-top: 4px; background: var(--white); }
 .cost-buttons { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 #cost-results-heading { margin: 24px 0 11px; }
+.cost-review-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
 .cost-result-card {
   min-width: 0; padding: 15px; border: 1px solid var(--line); border-top: 3px solid #cbd6c8; border-radius: 9px; background: #f6f8f1;
 }
@@ -415,7 +416,7 @@ footer {
 }
 /* 검토안을 열지 않고 본문을 인쇄할 때: 조작 요소를 빼고 카드가 쪽 사이에서 잘리지 않게 한다. */
 @media print {
-  .skip, .topbar nav, .hero-actions, .form-bottom .button, .cost-buttons, .data-actions, .market-select, .dong-pick, .pick-row, .grid-tooltip { display: none; }
+  .skip, .topbar nav, .hero-actions, .form-bottom .button, .cost-buttons, .cost-review-actions, #cost-review-status, .data-actions, .market-select, .dong-pick, .pick-row, .grid-tooltip { display: none; }
   .site-header { position: static; }
   .strategy-heading { position: static; }
   .cost-input-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
