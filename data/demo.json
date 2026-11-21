@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "kind": "synthetic",
+  "source": {
+    "title": "SHIFT 카페·편의점 화면 확인용 가상 데이터",
+    "url": "",
+    "asOf": "2026-10-28",
+    "retrievedAt": "2026-10-28",
+    "scope": "가상 후보 A·B·C / 실제 상권 경계 미설정",
+    "classificationVersion": "개발용 카페 I21201·편의점 G20405 / 관측값이 아닌 가상 집계"
+  },
+  "observations": [
+    {
+      "marketId": "market-a",
+      "industryId": "food",
+      "count": 24
+    },
+    {
+      "marketId": "market-a",
+      "industryId": "retail",
+      "count": 16
+    },
+    {
+      "marketId": "market-b",
+      "industryId": "food",
+      "count": 12
+    },
+    {
+      "marketId": "market-b",
+      "industryId": "retail",
+      "count": 28
+    },
+    {
+      "marketId": "market-c",
+      "industryId": "food",
+      "count": 18
+    },
+    {
+      "marketId": "market-c",
+      "industryId": "retail",
+      "count": 12
+    }
+  ],
+  "industries": [
+    {
+      "id": "food",
+      "name": "카페",
+      "majorCodes": [
+        "I2"
+      ],
+      "majorNames": {
+        "I2": "음식"
+      },
+      "smallCodes": [
+        "I21201"
+      ],
+      "smallNames": {
+        "I21201": "카페"
+      }
+    },
+    {
+      "id": "retail",
+      "name": "편의점",
+      "majorCodes": [
+        "G2"
+      ],
+      "majorNames": {
+        "G2": "소매"
+      },
+      "smallCodes": [
+        "G20405"
+      ],
+      "smallNames": {
+        "G20405": "편의점"
+      }
+    }
+  ]
+}

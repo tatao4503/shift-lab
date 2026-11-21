@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="대구 후보 지역의 공개 점포 정보와 내 창업 조건을 한눈에 비교하는 SHIFT LAB.">
+  <meta name="theme-color" content="#f4f5ef">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <title>SHIFT LAB · 창업 입지 검토</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23122d23'/%3E%3Cpath d='M17 46L45 18M24 18h21v21' stroke='%23dfebd7' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="src/styles.css">
+  <link rel="stylesheet" href="src/review.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <div class="topbar">
+      <a class="brand" href="#main" aria-label="SHIFT LAB 시작"><span class="brand-mark" aria-hidden="true">↗</span><span>SHIFT<span class="brand-lab"> LAB</span></span></a>
+      <nav aria-label="주요 메뉴">
+        <a href="#comparison">후보 비교</a><a href="#conditions">창업 조건</a><a href="#cost-section" id="cost-nav">비용 검토</a><a href="#data">자료와 검토안</a>
+      </nav>
+      <span class="status-pill">자료 확인 중</span>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">어디서 시작할까.<br><em>얼마가 필요할까.</em></h1>
+        <p>후보 지역의 점포 수를 비교하고<br class="hero-break"> 내 예산으로 필요한 창업 자금을 검토하세요.</p>
+        <div class="hero-actions"><a class="button" href="#comparison">후보 비교 <span aria-hidden="true">↓</span></a><a class="button" href="#conditions">내 조건 입력 <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <figure class="hero-picture">
+        <img src="src/assets/storefront-concept.webp" alt="" width="1200" height="800" fetchpriority="high" decoding="async">
+        <figcaption>콘셉트 이미지</figcaption>
+      </figure>
+    </section>
+    <div id="app-loading" role="status">자료를 불러오는 중입니다.</div>
+    <div id="app-content" hidden>
+      <section id="comparison" aria-labelledby="comparison-heading">
+        <div class="section-heading comparison-heading"><div><h2 id="comparison-heading" tabindex="-1">권역별 경쟁환경 비교</h2><p id="comparison-intro" class="section-intro">같은 기준일의 점포 수를 나란히 살펴보세요.</p></div><span id="comparison-label" class="outline-pill"></span></div>
+        <div class="notice" id="dataset-notice"><span class="notice-icon" aria-hidden="true">i</span><div><strong id="notice-title">자료를 확인하고 있습니다.</strong><p id="notice-description"></p></div></div>
+        <div id="market-cards" class="market-grid"></div>
+        <div class="pick-row"><p id="pick-status" class="live-status" role="status" aria-live="polite"></p><button id="reset-picks" class="button text-button" type="button" hidden>처음 세 곳으로</button></div>
+        <p id="comparison-footnote" class="footnote">비교하는 두 업종 내 비중을 표시합니다.</p>
+        <div id="distribution" class="distribution" hidden>
+          <h3 id="distribution-heading">동 안에서 어디에 모여 있나</h3>
+          <p id="distribution-intro" class="section-intro"></p>
+          <ul id="distribution-legend" class="grid-legend" aria-label="칸의 색이 뜻하는 점포 수"></ul>
+          <div id="distribution-charts" class="market-grid distribution-grid"></div>
+          <p id="distribution-note" class="footnote"></p>
+          <div id="grid-tooltip" class="grid-tooltip" aria-hidden="true" hidden></div>
+        </div>
+      </section>
+      <section id="conditions" class="panel conditions">
+        <div class="section-heading"><div><h2>내 창업 조건</h2><p class="section-intro">업종과 자금 계획을 적용하면 비교 결과가 바뀝니다.</p></div></div>
+        <form id="profile-form">
+          <div class="form-grid">
+            <label class="f-industry">희망 업종<select id="industry" name="industry"><option value="food">카페</option><option value="retail">편의점</option></select></label>
+            <label id="industry-other-field" class="f-other" hidden>함께 비교할 업종<select id="industry-other" name="industryOther"></select></label>
+            <label class="f-budget">검토 예산 <span class="field-unit">만 원</span><input id="budget" name="budget" type="number" value="5000" min="1" max="10000000" step="1" required inputmode="numeric"></label>
+            <label class="f-months">목표 운영기간 <span class="field-unit">개월</span><input id="months" name="months" type="number" value="12" min="1" max="120" step="1" required inputmode="numeric"></label>
+            <label class="f-goal">운영목표<select id="goal" name="goal"><option value="stable">안정적인 운영</option><option value="test">작게 수요 검증</option><option value="expand">장기 운영·확장 검토</option></select></label>
+            <label class="f-risk">위험 감수 수준<select id="risk" name="risk"><option value="low">낮음 · 손실 최소화</option><option value="medium">보통 · 조건부 검토</option><option value="high">높음 · 실험 감수</option></select></label>
+          </div>
+          <div class="form-bottom"><p id="profile-hint">비용 입력도 이 조건을 기준으로 계산합니다. 업종별 비용 가정은 별도로 보관합니다.</p><button class="button primary" type="submit">내 조건으로 비교 <span aria-hidden="true">↗</span></button></div>
+          <p id="form-status" class="live-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <section id="cost-section" class="panel cost-panel">
+        <div class="section-heading"><div><h2>후보별 비용 검토</h2></div><span class="outline-pill">사용자 입력 가정</span></div>
+        <p class="section-intro">실제 지역 시세나 자동 견적이 아닙니다. 보증금·초기 투입액·월 고정비를 직접 입력하세요. 비어 있는 항목은 0원으로 계산하지 않습니다.</p>
+        <p id="cost-context" class="cost-context"></p>
+        <form id="cost-form">
+          <div class="reserve-row"><label>공통 유보금 <span class="field-unit">만 원</span><input id="reserve" type="number" min="0" max="10000000" step="1" placeholder="미입력" inputmode="numeric" aria-label="공통 유보금 (만 원)"></label><p>운영비로 쓰지 않고 남겨 둘 금액입니다. 없음은 0으로 입력하세요. 금액 단위는 모두 만 원입니다.</p></div>
+          <div id="cost-input-cards" class="cost-grid"></div>
+          <p class="footnote">기타 초기 투입액에는 보증금을 제외한 설비·인테리어·권리금 등 시작할 때 묶이는 비용을 입력합니다. 기타 월 고정비에 인건비·관리비 등 필요한 항목이 빠지지 않았는지 직접 확인하세요.</p>
+          <div class="form-bottom"><p>현재 적용된 상단 조건으로 계산합니다. 비용은 자료·업종별로 이 화면에서만 보관하며 새로고침하면 지워집니다.</p><div class="cost-buttons"><button id="clear-costs" class="button text-button" type="button">현재 비용 비우기</button><button class="button primary" type="submit">입력 비용으로 계산 <span aria-hidden="true">↗</span></button></div></div>
+          <p id="cost-status" class="live-status" role="status" aria-live="polite"></p>
+        </form>
+        <h3 id="cost-results-heading" tabindex="-1">목표기간 자금 비교</h3>
+        <div id="cost-result-cards" class="cost-grid cost-results" aria-labelledby="cost-results-heading"></div>
+        <p class="footnote">매출 유입을 0으로 두고 입력 고정비만 차감한 계산입니다. 재료비·카드수수료·세금 등 변동비, 보증금 반환시점은 반영하지 않습니다. 충당개월은 실제 존속기간이 아니며, 잔액이 있어도 수익성·진입 타당성을 뜻하지 않습니다.</p>
+      </section>
+      <section id="strategy" class="strategy-layout">
+        <div class="strategy-heading"><h2>계약 전에 <br>확인할 것</h2><p>선택한 후보와 내 비용 조건을 바탕으로, 추가로 살펴볼 항목을 정리합니다.</p></div>
+        <article class="panel strategy-panel" aria-labelledby="strategy-title"><div class="strategy-kicker"><span id="strategy-market"></span><span class="status-pill light">초기 검토 규칙</span></div><h3 id="strategy-title"></h3><h4>이 조건에서의 검토 근거</h4><ul id="strategy-reasons"></ul><details id="strategy-detail" class="reason-detail" hidden><summary id="strategy-detail-summary"></summary><ul id="strategy-detail-list"></ul></details><div class="checks-block"><h4>계약 전에 더 확인하세요</h4><ul id="strategy-checks"></ul></div><p class="footnote">규칙의 유용성과 추천 품질은 아직 검증하지 않았습니다. 창업 성공을 보장하지 않습니다.</p></article>
+      </section>
+      <section id="data" class="panel data-panel">
+        <div class="section-heading"><div><h2>판단에 사용한 자료</h2></div><span id="data-kind" class="outline-pill"></span></div>
+        <dl id="source-details" class="source-grid"></dl>
+        <div id="quality-summary" class="quality-summary" hidden><strong id="quality-counts"></strong><p id="quality-scope"></p><details><summary>원본 해시와 검사 한계</summary><code id="quality-hash"></code><p id="quality-limit"></p><a id="quality-download" href="data/quality-public.json" download hidden>내장 공개파일의 품질 보고 JSON</a></details></div>
+        <div class="data-actions"><button id="view-review" class="button primary" type="button" aria-expanded="false" aria-controls="review-panel">검토안 보기 <span aria-hidden="true">↗</span></button><button id="export-report" class="button secondary" type="button">검토안 JSON 저장 <span aria-hidden="true">↓</span></button><label class="button secondary upload-label">정규화 자료 불러오기<input id="dataset-file" type="file" accept=".json,application/json"></label><button id="restore-public" class="button secondary" type="button" hidden>공개파일 집계로 돌아가기</button><button id="reset-demo" class="button text-button" type="button">가상 예시 보기</button></div>
+        <p id="data-status" class="live-status" role="status" aria-live="polite"></p>
+        <details><summary>가져오기 형식과 현재 개발 범위</summary><div class="details-body"><p>JSON 자료의 3개 권역 × 2개 업종, 총 6개 집계행과 출처 메타데이터를 검사합니다. 누락행은 0으로 바꾸지 않습니다. 직접 가져온 자료는 ‘사용자 제공 · 원천 진위 미검증’으로 표시합니다.</p><p>원천 CSV는 프로젝트의 로컬 변환 도구로 검사·집계합니다. 원본 행정동 코드를 사용하며 지도 경계·면적·밀도는 산출하지 않습니다. <a href="data/import-template.json" download>가상 형식 예시 JSON 받기</a></p><p>Consumer Shift Velocity(CSV)는 비교 가능한 시계열 소비데이터 확보 후 구현합니다. 상가업소 목록으로 소비비중을 대신 만들지 않습니다.</p></div></details>
+      </section>
+      <section id="review-panel" class="panel review-panel" aria-labelledby="review-heading" hidden>
+        <div class="review-header">
+          <div><p class="eyebrow">SHIFT LAB</p><h2 id="review-heading" tabindex="-1">창업 검토안</h2></div>
+          <div class="review-actions">
+            <button id="print-review" class="button primary" type="button">인쇄 / PDF 저장</button>
+            <button id="close-review" class="button text-button" type="button">검토안 닫기</button>
+          </div>
+        </div>
+        <p id="review-status" class="live-status" role="status" aria-live="polite"></p>
+        <div id="review-content" hidden></div>
+      </section>
+      <footer><span class="footer-brand">SHIFT LAB</span><p>상권, 당신의 사업이 성공할 때까지.</p><span>개발판 v0.11</span></footer>
+    </div>
+    <noscript>이 데모는 JavaScript를 켜야 사용할 수 있습니다.</noscript>
+  </main>
+</body>
+</html>

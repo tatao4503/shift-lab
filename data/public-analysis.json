@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 2,
+  "kind": "public-file",
+  "source": {
+    "title": "소상공인시장진흥공단 상가(상권)정보 대구 202609",
+    "url": "https://www.data.go.kr/data/15083033/fileData.do",
+    "asOf": "2026-09-30",
+    "retrievedAt": "2026-11-20",
+    "scope": "대구광역시 지역배포 CSV 전체 중 성내1동(27110565) / 산격3동(27230630) / 두산동(27260640) 행정동코드 집계",
+    "classificationVersion": "20260930 배포본 상권업종분류 소분류: I21201=카페(부모 I2=음식), G20405=편의점(부모 G2=소매) / 표준산업분류 10차 안내",
+    "provider": "소상공인시장진흥공단 / 공공데이터포털",
+    "license": "공공데이터포털 이용허락범위 제한 없음 표기, 2026-11-20 확인",
+    "sha256": "a92edd633eef42cbbb21bf908e84ca89bbcbb9ad141c9735b816da89430b1216"
+  },
+  "analysis": {
+    "method": "administrative-dong-code",
+    "status": "development-proposal",
+    "version": "daegu-cafe-convenience-202609-v1",
+    "markets": [
+      {
+        "id": "market-a",
+        "name": "성내1동",
+        "admCode": "27110565",
+        "sourceAdmName": "성내1동",
+        "sourceRowCount": 3377
+      },
+      {
+        "id": "market-b",
+        "name": "산격3동",
+        "admCode": "27230630",
+        "sourceAdmName": "산격3동",
+        "sourceRowCount": 927
+      },
+      {
+        "id": "market-c",
+        "name": "두산동",
+        "admCode": "27260640",
+        "sourceAdmName": "두산동",
+        "sourceRowCount": 1518
+      }
+    ],
+    "industries": [
+      {
+        "id": "food",
+        "name": "카페",
+        "majorCodes": [
+          "I2"
+        ],
+        "majorNames": {
+          "I2": "음식"
+        },
+        "smallCodes": [
+          "I21201"
+        ],
+        "smallNames": {
+          "I21201": "카페"
+        }
+      },
+      {
+        "id": "retail",
+        "name": "편의점",
+        "majorCodes": [
+          "G2"
+        ],
+        "majorNames": {
+          "G2": "소매"
+        },
+        "smallCodes": [
+          "G20405"
+        ],
+        "smallNames": {
+          "G20405": "편의점"
+        }
+      }
+    ],
+    "completeScope": "대구광역시 지역배포 CSV 전체",
+    "sourceSha256": "a92edd633eef42cbbb21bf908e84ca89bbcbb9ad141c9735b816da89430b1216",
+    "sourceRows": 116628,
+    "qualityStatus": "structural-checks-passed",
+    "originVerified": false,
+    "completeScopeVerified": false,
+    "limitations": [
+      "행정동코드별 집계이며 실제 상권 경계·폴리곤·반경 분석이 아닙니다.",
+      "분석 지역은 개발 제안이며 공인 상권 경계가 아닙니다.",
+      "원천의 진위·최신성·누락 없는 전체 수집은 자동 검증하지 않았습니다.",
+      "점포 수는 소비수요·경쟁 강도·성공확률이나 추천 품질 검증 결과가 아닙니다.",
+      "표시 비중은 선택 소분류 점포 수를 비교하는 두 소분류 점포 수의 합으로 나눈 값이며 전체 업종 점유율·밀도가 아닙니다."
+    ]
+  },
+  "observations": [
+    {
+      "marketId": "market-a",
+      "industryId": "food",
+      "count": 231
+    },
+    {
+      "marketId": "market-a",
+      "industryId": "retail",
+      "count": 32
+    },
+    {
+      "marketId": "market-b",
+      "industryId": "food",
+      "count": 53
+    },
+    {
+      "marketId": "market-b",
+      "industryId": "retail",
+      "count": 20
+    },
+    {
+      "marketId": "market-c",
+      "industryId": "food",
+      "count": 67
+    },
+    {
+      "marketId": "market-c",
+      "industryId": "retail",
+      "count": 23
+    }
+  ]
+}

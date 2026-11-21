@@ -1,0 +1,14 @@
+{
+  "defaultDataset": "public-analysis.json",
+  "publicAvailable": true,
+  "dongIndex": "dong-index.json",
+  "dongIndexHistory": [
+    "dong-index-202606.json",
+    "dong-index-202506.json"
+  ],
+  "dongFlows": [
+    "dong-flows-202606.json",
+    "dong-flows-202506.json"
+  ],
+  "dongGrids": "grid"
+}
