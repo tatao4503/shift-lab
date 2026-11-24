@@ -1,0 +1,404 @@
+#property-review {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+#property-review-heading { margin: 0; }
+
+.property-review-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+
+.property-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.property-review-terms {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 15px;
+  margin: 16px 0 12px;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.property-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.property-review-grid[data-columns='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.property-review-card {
+  min-width: 0;
+  padding: clamp(12px, 1.8vw, 20px);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--green);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.property-review-card h4 { margin: 0; font-size: 1.15em; }
+.property-review-card h5 { margin: 0; font-size: 1em; }
+
+.property-review-meta,
+.property-review-area {
+  margin: 3px 0;
+  color: var(--muted);
+  font-size: .88em;
+}
+
+.property-review-area { color: var(--green); }
+
+.property-review-toggle,
+.property-review-evidence-mobile { display: none; }
+
+.property-review-terms dt,
+.property-review-card dt { color: var(--muted); }
+
+.property-review-terms dd,
+.property-review-card dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.property-review-cost {
+  margin: 10px 0 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.property-review-cost dt,
+.property-review-terms dt { font-size: .84em; }
+.property-review-cost[data-balance='shortfall'] dd { color: var(--warm-ink); }
+.property-review-cost[data-balance='remaining'] dd { color: var(--green); }
+
+.property-review-cost-values > :first-child dd,
+.property-review-amount {
+  margin: 0;
+  font-size: clamp(17px, 2.1vw, 24px);
+  font-weight: 760;
+  letter-spacing: -.035em;
+  line-height: 1.3;
+}
+
+.property-review-cost-values > :last-child {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.property-review-inputs { margin: 0; font-size: .9em; }
+.property-review-inputs > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 8px;
+}
+
+.property-review-inputs dt, .property-review-inputs dd { min-width: 0; }
+.property-review-inputs dd { text-align: right; }
+
+.property-review-next {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: .9em;
+}
+
+.property-review-next p { margin: 2px 0 0; }
+.property-review-memo { color: var(--muted); }
+
+.property-review-scope {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .85em;
+}
+
+.property-review-scope h4 { margin: 0; color: var(--ink); }
+.property-review-scope p { margin: 4px 0 0; }
+.property-review-source-link { color: var(--green); text-underline-offset: 2px; }
+
+@media screen {
+  #property-review {
+    margin-top: clamp(30px, 4vw, 48px);
+    padding-top: clamp(24px, 3.6vw, 40px);
+    border-color: var(--shell-stroke, var(--line));
+  }
+  #property-review-heading {
+    font-size: clamp(26px, 3.6vw, 42px);
+    font-weight: 790;
+    letter-spacing: -.052em;
+    line-height: 1.12;
+  }
+
+  .property-review-header { align-items: end; margin-bottom: 18px; }
+  .property-review-header .eyebrow { margin-bottom: 6px; color: var(--shell-accent, var(--green)); }
+  .property-review-actions .button { padding-inline: 16px; border-radius: 999px; }
+  .property-review-actions .secondary {
+    background: var(--shell-soft, #e9f2e9);
+    border-color: transparent;
+    color: var(--shell-accent, var(--green));
+  }
+  .property-review-actions .secondary:hover { background: #dcebe0; }
+  .property-review-actions .primary { box-shadow: 0 3px 8px #142c231c; }
+
+  .property-review-terms {
+    gap: 0;
+    margin: 0 0 14px;
+    padding: 12px 4px;
+    border-color: var(--shell-stroke, var(--line));
+    border-radius: 21px;
+    background: var(--shell-panel, #fbfcf9);
+  }
+  .property-review-terms > div { padding-inline: clamp(12px, 2.1vw, 23px); }
+  .property-review-terms > div + div { border-inline-start: 1px solid var(--shell-stroke, var(--line)); }
+  .property-review-terms dd {
+    margin-top: 2px;
+    font-size: clamp(.98em, 1.5vw, 1.18em);
+    letter-spacing: -.027em;
+  }
+
+  .property-review-overview {
+    margin: 0 0 18px;
+    padding: clamp(15px, 2.5vw, 26px);
+    border: 1px solid #dce8de;
+    border-radius: 24px;
+    background: linear-gradient(150deg, #f1f7f0, var(--shell-soft, #e9f2e9));
+    box-shadow: inset 0 1px 0 #ffffffb3;
+  }
+
+  .property-overview-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 12px;
+  }
+
+  .property-overview-head h4 { font-size: clamp(16px, 2.2vw, 22px); letter-spacing: -.03em; }
+
+  .property-overview-key {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--shell-accent, var(--green));
+    font-size: .84em;
+    font-weight: 700;
+  }
+
+  .property-overview-key::before {
+    content: '';
+    height: 1em;
+    border-inline-start: 2px dashed currentColor;
+  }
+
+  .property-overview-list { padding: 0; list-style: none; }
+  .property-overview-row {
+    --property-overview-fill: #759f7d;
+    --property-overview-accent: var(--shell-accent, var(--green));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.4fr);
+    align-items: center;
+    gap: 8px clamp(9px, 2vw, 25px);
+    padding-block: 12px;
+    border-top: 1px solid #d8e5da;
+  }
+
+  .property-overview-row[data-balance='shortfall'] {
+    --property-overview-fill: #bc8660;
+    --property-overview-accent: var(--warm-ink);
+  }
+  .property-overview-row[data-balance='pending'] { --property-overview-accent: var(--muted); }
+
+  .property-overview-label { font-size: .91em; line-height: 1.35; }
+
+  .property-overview-track {
+    position: relative;
+    min-width: 0;
+    height: 8px;
+    border-radius: 999px;
+    background: #d6e3d8;
+  }
+  .property-overview-row[data-balance='pending'] .property-overview-track { visibility: hidden; }
+
+  .property-overview-bar {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--property-overview-fill);
+  }
+
+  .property-overview-track::after {
+    position: absolute;
+    inset-block: -4px;
+    inset-inline-start: var(--property-budget-line);
+    content: '';
+    border-inline-start: 2px dashed var(--deep);
+    box-shadow: 1px 0 #edf5ed;
+  }
+
+  .property-overview-values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1px 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .property-overview-values strong {
+    font-size: clamp(16px, 1.9vw, 24px);
+    font-weight: 790;
+    letter-spacing: -.047em;
+    line-height: 1.2;
+  }
+  .property-overview-balance { color: var(--property-overview-accent); font-size: .82em; font-weight: 750; }
+
+  .property-review-grid { gap: 14px; }
+  .property-review-card {
+    padding: clamp(14px, 2vw, 23px);
+    border: 1px solid var(--shell-stroke, var(--line));
+    border-radius: 23px;
+    background: #fff;
+    box-shadow: 0 5px 16px #142c230a;
+  }
+  .property-review-card h4 { font-size: clamp(16px, 1.65vw, 20px); text-wrap: initial; }
+  .property-review-cost {
+    margin-block: 13px 10px;
+    padding: 10px 12px;
+    border-color: #edf0eb;
+    border-radius: 15px;
+    background: #f4f7f3;
+  }
+  .property-review-cost[data-balance='shortfall'] { border-color: #f1e6db; background: #faf3ed; }
+  .property-review-cost[data-balance='remaining'] { border-color: #e4ede4; background: #eff5ee; }
+  .property-review-cost-values > :first-child dd { color: var(--ink); }
+  .property-review-cost-values > :last-child { margin-top: 6px; padding-top: 6px; }
+  .property-review-inputs > div { padding-block: 3px; }
+  .property-review-inputs > div + div { border-top: 1px solid #edf1ed; }
+  .property-review-next { padding-top: 10px; margin-top: 10px; }
+  .property-review-scope {
+    margin-top: 18px;
+    padding: 12px 15px;
+    border: 1px solid var(--shell-stroke, var(--line));
+    border-radius: 17px;
+    background: var(--shell-panel, #fbfcf9);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .property-review-grid, .property-review-grid[data-columns='3'] { grid-template-columns: minmax(0, 1fr); }
+  .property-review-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 0; }
+  .property-review-terms > div:nth-child(odd) { border-inline-start: 0; }
+}
+
+@media screen and (max-width: 690px) {
+  .property-review-evidence-wide,
+  .property-review-toggle[aria-expanded='false'] + .property-review-details { display: none; }
+
+  .property-review-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    width: 100%;
+    padding: 8px 13px;
+    border: 1px solid var(--shell-stroke, var(--line));
+    border-radius: 14px;
+    background: var(--shell-panel, #fbfcf9);
+    color: var(--shell-accent, var(--green));
+    font-size: .86em;
+    font-weight: 730;
+    text-align: start;
+  }
+  .property-review-toggle[aria-expanded='true'],
+  .property-review-toggle:hover { background: var(--shell-soft, #e9f2e9); }
+  .property-review-toggle::after {
+    content: '';
+    flex: 0 0 8px;
+    height: 8px;
+    margin-inline: 0 2px;
+    border-inline-end: 1.5px solid currentColor;
+    border-block-end: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+  .property-review-toggle[aria-expanded='true']::after { transform: translateY(2px) rotate(225deg); }
+  .property-review-details { padding: 8px 3px 0; }
+  .property-review-evidence-mobile { display: block; margin-bottom: 6px; }
+}
+
+@media screen and (max-width: 540px) {
+  .property-review-header { align-items: start; gap: 13px; }
+  .property-review-actions { width: 100%; }
+  .property-review-actions .button { flex: 1 1 auto; padding-inline: 11px; }
+  .property-review-overview, .property-review-card { border-radius: 20px; }
+  .property-overview-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 5px 9px; }
+  .property-overview-values { justify-content: flex-end; text-align: end; }
+  .property-overview-track { grid-column: 1 / -1; grid-row: 2; margin-top: 2px; }
+  .property-overview-row[data-balance='pending'] .property-overview-track { display: none; }
+}
+
+@media screen and (forced-colors: active) {
+  .property-overview-track, .property-overview-bar { forced-color-adjust: none; }
+  .property-overview-track { background: Canvas; outline: 1px solid CanvasText; }
+  .property-overview-bar { background: Highlight; }
+  .property-overview-track::after { border-color: CanvasText; box-shadow: 1px 0 Canvas; }
+}
+
+@media print {
+  @page shift-property {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body[data-print-view='property'] > :not(#main),
+  body[data-print-view='property'] #main > :not(#app-content),
+  body[data-print-view='property'] #app-content > :not(#property-section),
+  body[data-print-view='property'] #property-section > :not(#property-review),
+  body[data-print-view='property'] .property-review-overview,
+  body[data-print-view='property'] #property-review .property-review-actions { display: none !important; }
+
+  :root:has(body[data-print-view='property']),
+  body[data-print-view='property'],
+  body[data-print-view='property'] :is(#main, #app-content, #property-section, #property-review) {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  body[data-print-view='property'] #property-review {
+    page: shift-property;
+    line-height: 1.33;
+    font-size: 10pt;
+    print-color-adjust: exact;
+  }
+
+  body[data-print-view='property'] #property-review-heading { color: var(--deep); font-size: 22pt; }
+  body[data-print-view='property'] .property-review-terms { margin: 10pt 0 8pt; padding: 7pt; }
+  body[data-print-view='property'] .property-review-grid { gap: 7pt; }
+  body[data-print-view='property'] .property-review-card { break-inside: avoid; padding: 7pt; border-top-width: 1.5pt; }
+  body[data-print-view='property'] .property-review-cost { margin: 6pt 0 5pt; padding: 5pt; }
+  body[data-print-view='property'] .property-review-cost-values > :first-child dd,
+  body[data-print-view='property'] .property-review-amount { font-size: 15pt; }
+}

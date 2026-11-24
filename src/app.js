@@ -6,6 +6,9 @@ import { validateDongIndex, datasetFromIndex, groupDongs, groupCategories, findD
 import { orderHistory, countChange, changeReason } from './changes.js';
 import { validateFlows, cellFlow } from './flows.js';
 import { validateGrid, gridView, scaleBar, sectorOf, binOf, BINS } from './grid.js';
+import { mountPropertyWorkbench } from './property-workbench.js';
+import { mountMobileNav } from './mobile-nav.js';
+import { mountExperiencePanel } from './experience-panel.js';
 
 const $ = (id) => document.getElementById(id);
 const number = new Intl.NumberFormat('ko-KR');
@@ -327,7 +330,7 @@ function render() {
     : '대구 행정동별 수록 점포입니다. 현재 영업 상태와 수요는 별도로 확인해야 합니다.';
   $('notice-description').textContent = synthetic ? '후보 A·B·C의 공간 범위와 점포 수는 시연을 위한 가정입니다.' : publicFile ? publicNote : '출처와 기준일의 형식을 검사했습니다. 원본과 공간 범위는 별도로 확인이 필요합니다.';
   document.querySelector('.topbar .status-pill').textContent = synthetic ? '가상 데이터 데모' : publicFile ? '공개파일 집계' : '사용자 제공 자료';
-  $('comparison-heading').textContent = analysis ? '권역별 경쟁환경 비교' : '상권별 경쟁환경 비교';
+  $('comparison-heading-text').textContent = analysis ? '권역별 경쟁환경 비교' : '상권별 경쟁환경 비교';
   const picking = canPickDongs();
   $('comparison-intro').textContent = picking ? '같은 기준일의 점포 수를 나란히 살펴보세요. 카드마다 대구의 다른 행정동으로 바꿀 수 있습니다.' : '같은 기준일의 점포 수를 나란히 살펴보세요.';
   $('reset-picks').hidden = !picking || dongCodes(state.dataset).join() === dongCodes(state.defaultPublicDataset).join();
@@ -461,7 +464,7 @@ function makeReport() {
   const rows = compareMarkets(state.dataset, state.profile.industryId);
   const scenario = state.dataset.kind === 'synthetic' ? null : currentCostScope().applied;
   return {
-    app: 'SHIFT LAB', version: '0.11.0', generatedAt: new Date().toISOString(),
+    app: 'SHIFT LAB', version: '0.12.0', generatedAt: new Date().toISOString(),
     status: kindLabel(), datasetKind: state.dataset.kind,
     limitations: [state.dataset.analysis ? '행정동 기준 개발안 · 공인 상권 경계 아님 · 면적당 밀도 미산출' : '실제 상권·공간 경계 미확정', '비중의 분모는 비교하는 두 업종의 점포 수 합계', '종합 기회·위험 점수 및 Consumer Shift Velocity 미산출', '수요·임대료·개별 점포 비용 미확보', '규칙의 유용성과 추천 품질 미검증'],
     source: { ...state.dataset.source }, analysis: state.dataset.analysis || null, industries: getIndustries(state.dataset), profile: { ...state.profile },
@@ -506,6 +509,7 @@ function setReviewOpen(open, trigger = reviewOrigin) {
   $('review-panel').hidden = !open;
   for (const [id] of reviewTriggers) $(id).setAttribute('aria-expanded', String(open));
   if (open) {
+    delete document.body.dataset.printView;
     updateReview();
     focusSection('review-heading', 'review-panel');
   } else {
@@ -577,8 +581,11 @@ async function start() {
     state.dataset = catalog.defaultDataset === 'public-analysis.json' ? state.publicDataset : state.demo;
     if (!state.dataset) throw new Error('기본 자료와 자료 목록이 맞지 않습니다.');
     render();
+    mountPropertyWorkbench(state.dongIndex);
+    mountExperiencePanel(state.dongIndex);
     $('app-loading').hidden = true;
     $('app-content').hidden = false;
+    mountMobileNav();
   } catch (error) {
     $('app-loading').textContent = `자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요. 내 컴퓨터에서 볼 때는 프로젝트 폴더에서 npm run dev를 실행한 뒤 localhost 주소로 엽니다. (${error.message})`;
     return;
@@ -718,7 +725,10 @@ async function start() {
   }
   $('close-review').addEventListener('click', () => setReviewOpen(false));
   $('print-review').addEventListener('click', () => {
-    if (!hasUnappliedEdits()) window.print();
+    if (!hasUnappliedEdits()) {
+      delete document.body.dataset.printView;
+      window.print();
+    }
   });
   $('export-report').addEventListener('click', () => {
     if (hasUnappliedEdits()) {

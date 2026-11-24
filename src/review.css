@@ -334,16 +334,16 @@
     margin: 12mm;
   }
 
-  body:has(#review-panel:not([hidden]) #review-content:not([hidden])) > :not(#main),
-  body:has(#review-panel:not([hidden]) #review-content:not([hidden])) #main > :not(#app-content),
-  body:has(#review-panel:not([hidden]) #review-content:not([hidden])) #app-content > :not(#review-panel),
+  body:not([data-print-view="property"]):has(#review-panel:not([hidden]) #review-content:not([hidden])) > :not(#main),
+  body:not([data-print-view="property"]):has(#review-panel:not([hidden]) #review-content:not([hidden])) #main > :not(#app-content),
+  body:not([data-print-view="property"]):has(#review-panel:not([hidden]) #review-content:not([hidden])) #app-content > :not(#review-panel),
   #review-panel .review-actions {
     display: none;
   }
 
-  :root:has(#review-panel:not([hidden]) #review-content:not([hidden])),
-  body:has(#review-panel:not([hidden]) #review-content:not([hidden])),
-  body:has(#review-panel:not([hidden]) #review-content:not([hidden])) :is(#main, #app-content) {
+  :root:has(body:not([data-print-view="property"]) #review-panel:not([hidden]) #review-content:not([hidden])),
+  body:not([data-print-view="property"]):has(#review-panel:not([hidden]) #review-content:not([hidden])),
+  body:not([data-print-view="property"]):has(#review-panel:not([hidden]) #review-content:not([hidden])) :is(#main, #app-content) {
     display: block;
     width: auto;
     min-width: 0;

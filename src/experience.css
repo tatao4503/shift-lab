@@ -1,0 +1,62 @@
+/* 먼저 닫아 본 사람들의 경험. 화면에서만 쓰고, 인쇄에는 어느 검토안에도 넣지 않는다. */
+.experience-hint, .experience-section { display: none; }
+
+@media screen {
+  .experience-section:not([hidden]) {
+    display: block; margin-bottom: 48px; padding: clamp(17px, 3.45vw, 44px);
+    background: var(--shell-panel, #fbfcf9); border-radius: 28px; border-color: var(--shell-stroke, #dbe5dc);
+    box-shadow: var(--shell-shadow, 0 12px 36px #142c2310);
+  }
+  .experience-section .section-heading h2 { font-size: clamp(25px, 3.6vw, 38px); line-height: 1.16; }
+  .experience-section .section-intro { max-width: 62ch; }
+  .experience-section[data-kind='demo'] #experience-kind { background: var(--warm); border-color: #e6d6bf; color: var(--warm-ink); }
+  .experience-unsaved:empty { display: none; }
+  .experience-unsaved { margin: 0 0 12px; color: var(--warm-ink); font-size: 14px; font-weight: 650; }
+
+  .experience-view { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 18px 28px; align-items: start; }
+  .experience-view-pick { align-self: start; }
+  .experience-summary { min-width: 0; padding: 18px 20px; border: 1px solid var(--shell-stroke, #dbe5dc); border-radius: 18px; background: #f6f9f4; }
+  .experience-summary > :last-child { margin-bottom: 0; }
+  .experience-summary h3 { margin: 0 0 12px; font-size: 19px; line-height: 1.3; }
+  .experience-summary h4 { margin: 16px 0 6px; font-size: 14px; color: var(--muted); letter-spacing: .02em; }
+  .experience-empty { margin: 0; color: var(--muted); }
+  .experience-demo-note { margin: 0 0 14px; padding: 10px 13px; border-radius: 12px; background: var(--warm); color: var(--warm-ink); font-size: 14px; font-weight: 650; }
+  .experience-items { margin: 0; padding: 0; list-style: none; }
+  .experience-items li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding: 9px 0; border-top: 1px solid #dfe8df; }
+  .experience-items li:first-child { border-top: 0; padding-top: 0; }
+  .experience-items strong { font-weight: 730; }
+  .experience-items span { color: #36574a; font-variant-numeric: tabular-nums; }
+  .experience-setup { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid #dfe8df; font-size: 15px; }
+  .experience-notes { margin: 0; padding-left: 19px; font-size: 15px; }
+  .experience-notes li { margin-bottom: 3px; }
+  .experience-notes span { margin-left: 8px; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .experience-summary .footnote { margin-top: 14px; }
+
+  .experience-add { margin-top: 22px; border-top: 1px solid var(--shell-stroke, #dbe5dc); }
+  .experience-add > summary { min-height: 48px; padding: 13px 2px; cursor: pointer; font-weight: 760; font-size: 17px; }
+  .experience-add > summary span { margin-left: 8px; color: var(--muted); font-weight: 500; font-size: 14px; }
+  .experience-rule { margin: 2px 0 16px; padding: 11px 14px; border-radius: 12px; background: var(--shell-soft, #e9f2e9); color: #2c4c3d; font-size: 14px; }
+  .experience-basic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  #experience-form fieldset { min-width: 0; margin: 18px 0 0; padding: 14px 16px 16px; border: 1px solid var(--shell-stroke, #dbe5dc); border-radius: 16px; background: #fff; }
+  #experience-form legend { padding-inline: 6px; font-weight: 760; font-size: 16px; color: var(--shell-accent, #275943); }
+  .experience-choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 2px 14px; }
+  .experience-choices-row { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  .experience-choice { display: flex; align-items: center; gap: 9px; min-height: 44px; font-weight: 600; font-size: 15px; cursor: pointer; }
+  /* 공용 입력 규칙(너비 100%, 높이 45px)이 체크 상자에는 맞지 않아 되돌린다. */
+  .experience-choice input { flex: none; display: inline-block; width: 20px; height: 20px; margin: 0; padding: 0; accent-color: var(--shell-accent, #275943); }
+  .experience-note { margin-top: 10px; }
+  .experience-consent .experience-choice { align-items: flex-start; padding-block: 10px; min-height: 0; }
+  .experience-consent .experience-choice input { margin-top: 2px; }
+
+  .experience-hint:not([hidden]) { display: block; margin-top: 16px; padding: 16px 18px; border: 1px solid var(--shell-stroke, #dbe5dc); border-radius: 18px; background: #f6f9f4; }
+  .experience-hint h4 { margin: 0 0 8px; font-size: 16px; }
+  .experience-hint ul { margin: 0 0 8px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .experience-hint li { padding: 5px 12px; border: 1px solid #d4e4d7; border-radius: 999px; background: #fff; font-weight: 650; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+  .experience-hint p { margin: 0; color: var(--muted); font-size: 13.5px; }
+  .experience-hint a { display: inline-block; padding-block: 6px; font-weight: 700; }
+}
+@media screen and (max-width: 690px) {
+  .experience-section:not([hidden]) { border-radius: 23px; padding-inline: 13px; }
+  .experience-view, .experience-basic { grid-template-columns: minmax(0, 1fr); }
+  .experience-add > summary span { display: block; margin: 2px 0 0; }
+}
